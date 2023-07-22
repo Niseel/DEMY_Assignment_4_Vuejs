@@ -1,29 +1,28 @@
 const app = Vue.createApp({
   data() {
     return {
-      userInput: "",
-      isRender: true,
-      userInputBackground: "",
+      enterTask: "",
+      tasks: [],
+      isShow: true,
     };
   },
-  watch: {},
   computed: {
-    dynamicClass() {
-      return [
-        "default-text",
-        { user1: this.userInput === "user1" },
-        { user2: this.userInput === "user2" },
-        this.isRender ? "visible" : "hidden",
-      ];
+    renderCaption() {
+      return this.isShow ? "Show" : "Hide";
     },
-    dynamicStyles() {
-      return { backgroundColor: this.userInputBackground };
+    renderTaskList() {
+      return this.isShow;
     },
   },
   methods: {
-    showParagrahp() {
-      console.log(this.isRender);
-      this.isRender = !this.isRender;
+    addTask() {
+      if (this.enterTask) {
+        this.tasks.push(this.enterTask);
+        this.enterTask = "";
+      }
+    },
+    reRender() {
+      this.isShow = !this.isShow;
     },
   },
 });
